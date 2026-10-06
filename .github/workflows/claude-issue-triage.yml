@@ -53,6 +53,7 @@ jobs:
                - **Riesgos y restricciones**: p.ej. canvas `#board` 300×600 hard-coded, sincronía `PIECES`/`COLORS`/`randomPiece()`, controles duplicados en `index.html` y README.
                - **Criterios de verificación**: cómo probarlo manualmente en el navegador.
                - **Información faltante**: preguntas al autor si el issue es ambiguo (omitir si no aplica).
+            Formato: el contenido de `diagnosis.md` (que se publicará como comentario) debe estar en formato Markdown válido para que GitHub lo renderice correctamente (encabezados, listas, `código` y bloques de código con ```).
             No modifiques código ni publiques comentarios; el comentario lo publica un paso posterior.
           claude_args: '--allowedTools "Bash(gh issue view:*),Bash(gh label list:*),Bash(gh issue edit:*),Read,Glob,Grep,Write"'
 
