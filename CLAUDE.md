@@ -19,7 +19,7 @@ Verification is manual in the browser.
 ## Architecture (`game.js`)
 
 - **Global mutable state**: `board, current, next, score, lines, level, paused, gameOver, lastTime, dropAccum, dropInterval, animId` declared once at top; `init()` resets all of them and is also the restart handler.
-- **Board**: `ROWS × COLS` matrix; `0` = empty, `1–7` = piece type, which doubles as index into `COLORS` and as the value stored inside `PIECES` shape matrices. Adding/changing a piece means keeping `PIECES[i]` cells, `COLORS[i]`, and the `* 7` in `randomPiece()` in sync.
+- **Board**: `ROWS × COLS` matrix; `0` = empty, `1–8` = piece type, which doubles as index into `COLORS` and as the value stored inside `PIECES` shape matrices. Adding/changing a piece means keeping `PIECES[i]` cells, `COLORS[i]`, in sync (`randomPiece()` derives from `PIECES.length`). Piece 8 is the 3×3 "Tuerca" ring with an empty center, spawned with probability `NUT_CHANCE` (5%); the other 7 are uniform.
 - **Pieces**: `{ type, shape, x, y }`; `shape` is a square matrix copied from `PIECES`. Rotation = `rotateCW` (transpose + reverse) then `tryRotate` tests horizontal kicks `[0, -1, 1, -2, 2]` via `collide`. Not SRS.
 - **`collide(shape, ox, oy)`** is the single source of truth for movement validity; cells with `ny < 0` are allowed (above board).
 - **Lock pipeline**: `lockPiece()` → `merge()` → `clearLines()` (updates lines/score/level/`dropInterval`) → `spawn()` (promotes `next`, detects game over on spawn collision, redraws next-preview).
